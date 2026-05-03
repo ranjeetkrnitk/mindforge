@@ -43,6 +43,7 @@ Check `config/user.md`:
 | 3 | `mindmap` | "mind map", "visualize my knowledge", "map this topic" | `prompts/mindmap.md` |
 | 4 | `remap` | "remap my vault", "reorganize my notes", "apply CLS" | `prompts/remap.md` |
 | 5 | `harvest` | "harvest this session", "save what we discussed", "memorize this conversation" | `prompts/harvest.md` |
+| 6 | `prune` | "clean up empty notes", "prune my vault", "remove stubs", "find empty files" | `prompts/prune.md` |
 
 ## File Structure
 
@@ -54,7 +55,7 @@ Check `config/user.md`:
 ├── config/
 │   ├── settings.md         ← tunable thresholds
 │   └── user.md             ← local vault path (gitignored, written on first run)
-├── prompts/                ← one file per mode
+├── prompts/                ← one file per mode (capture, consolidate, mindmap, remap, harvest, prune)
 ├── templates/              ← concept, episode, claim, source, moc
 └── schema/                 ← full docs for humans; agents use REF.md
 ```

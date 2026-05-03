@@ -47,6 +47,13 @@ system_path: "_system/"
 archive_path: "_archived/"
 ```
 
+## Prune
+```yaml
+prune_min_body_words: 20           # files with fewer body words are classified as "stub"
+prune_dry_run_default: true        # when true, only report — do not patch frontmatter
+prune_requires_confirmation: true  # require explicit yes before archiving stubs
+```
+
 ## Agent Behavior
 ```yaml
 remap_dry_run_default: true
