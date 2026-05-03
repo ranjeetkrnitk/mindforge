@@ -1,0 +1,10 @@
+
+# memorize skill — local user config
+.agent/skills/memorize/config/user.md
+
+# Editor config
+.vscode/
+
+# macOS metadata
+.DS_Store
+**/.DS_Store

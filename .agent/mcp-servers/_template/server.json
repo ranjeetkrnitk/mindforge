@@ -1,0 +1,29 @@
+{
+  "name": "{{MCP_SERVER_NAME}}",
+  "version": "0.1.0",
+  "description": "{{One line description}}",
+  "transport": "{{stdio | sse | http}}",
+  "command": "{{command to start server}}",
+  "args": [],
+  "env": {
+    "{{ENV_VAR}}": "{{description of what goes here}}"
+  },
+  "tools": [
+    {
+      "name": "{{tool_name}}",
+      "description": "{{What this tool does}}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "{{param_name}}": {
+            "type": "string",
+            "description": "{{param description}}"
+          }
+        },
+        "required": ["{{param_name}}"]
+      }
+    }
+  ],
+  "resources": [],
+  "prompts": []
+}
