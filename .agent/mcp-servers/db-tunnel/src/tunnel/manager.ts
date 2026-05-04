@@ -11,6 +11,8 @@ export interface ActiveTunnel {
 }
 
 const activeTunnels = new Map<string, ActiveTunnel>();
+// Tracks in-flight connect promises to prevent concurrent duplicate connections
+const pendingTunnels = new Map<string, Promise<ActiveTunnel>>();
 
 /** Find a free local port starting from a given base. */
 function findFreePort(start: number): Promise<number> {
@@ -27,18 +29,38 @@ function findFreePort(start: number): Promise<number> {
 /**
  * Open an SSH tunnel for the given environment.
  * Returns the local port that the DB is accessible on.
+ * Concurrent calls for the same env share a single in-flight promise.
  */
-export async function openTunnel(
+export function openTunnel(
   envName: string,
   envConfig: SshTunnelEnvironment,
   localPortStart: number,
   connectTimeoutMs: number,
   totpCode?: string
 ): Promise<ActiveTunnel> {
+  // Return existing tunnel immediately
   if (activeTunnels.has(envName)) {
-    return activeTunnels.get(envName)!;
+    return Promise.resolve(activeTunnels.get(envName)!);
+  }
+  // Coalesce concurrent connect calls — only one SSH handshake per env
+  if (pendingTunnels.has(envName)) {
+    return pendingTunnels.get(envName)!;
   }
 
+  const promise = _openTunnel(envName, envConfig, localPortStart, connectTimeoutMs, totpCode)
+    .finally(() => pendingTunnels.delete(envName));
+
+  pendingTunnels.set(envName, promise);
+  return promise;
+}
+
+async function _openTunnel(
+  envName: string,
+  envConfig: SshTunnelEnvironment,
+  localPortStart: number,
+  connectTimeoutMs: number,
+  totpCode?: string
+): Promise<ActiveTunnel> {
   const { ssh, db } = envConfig;
 
   const sshPassword = await getSshPassword(envName);
@@ -49,25 +71,18 @@ export async function openTunnel(
     );
   }
 
-  let finalPassword = sshPassword;
-
-  if (ssh.auth === "totp") {
-    let code = totpCode;
-    if (!code) {
-      const secret = await getTotpSecret(envName);
-      if (secret) {
-        code = generateTotp(secret);
-      } else {
-        throw new Error(
-          `PROD environment "${envName}" requires TOTP.\n` +
-          `Option 1 (automated): Store TOTP secret via set_credential({ env: "${envName}", kind: "totp-secret", value: "BASE32SECRET" })\n` +
-          `Option 2 (manual):    Pass totp_code parameter to connect()`
-        );
-      }
+  // For TOTP: validate secret is available, but do NOT generate the code yet —
+  // codes expire every 30s and SSH negotiation can take 5-15s. The code is
+  // generated inside the keyboard-interactive callback, right when needed.
+  if (ssh.auth === "totp" && !totpCode) {
+    const secret = await getTotpSecret(envName);
+    if (!secret) {
+      throw new Error(
+        `PROD environment "${envName}" requires TOTP.\n` +
+        `Option 1 (automated): Store TOTP secret via set_credential({ env: "${envName}", kind: "totp-secret", value: "BASE32SECRET" })\n` +
+        `Option 2 (manual):    Pass totp_code parameter to connect()`
+      );
     }
-    // Many SSH servers accept password+TOTP concatenated, or password then keyboard-interactive TOTP.
-    // We handle keyboard-interactive below for TOTP.
-    finalPassword = sshPassword;
   }
 
   const localPort = await findFreePort(localPortStart);
@@ -89,6 +104,10 @@ export async function openTunnel(
 
     sshClient.on("ready", () => {
       clearTimeout(timeout);
+
+      // Detect tunnel drop after it's established and clean up stale map entry
+      sshClient.on("close", () => cleanup());
+      sshClient.on("end", () => cleanup());
 
       // Create a local TCP server that forwards to the remote DB
       const proxyServer = createServer((localSocket) => {
@@ -137,10 +156,9 @@ export async function openTunnel(
     };
 
     if (ssh.auth === "password") {
-      connectConfig.password = finalPassword;
+      connectConfig.password = sshPassword;
     } else if (ssh.auth === "totp") {
-      // Use keyboard-interactive for TOTP (password first, then TOTP code)
-      connectConfig.password = finalPassword;
+      connectConfig.password = sshPassword;
       connectConfig.tryKeyboard = true;
       connectConfig.authHandler = (methodsLeft, _partial, cb) => {
         if (!methodsLeft || methodsLeft.includes("keyboard-interactive")) {
@@ -152,17 +170,25 @@ export async function openTunnel(
         }
       };
 
-      let resolvedTotpCode = totpCode;
       sshClient.on("keyboard-interactive", (_name, _instructions, _lang, prompts, finish) => {
-        const responses: string[] = prompts.map((prompt) => {
-          const lc = prompt.prompt.toLowerCase();
-          if (lc.includes("password")) return finalPassword;
-          if (lc.includes("verification") || lc.includes("otp") || lc.includes("token") || lc.includes("code")) {
-            return resolvedTotpCode ?? "";
-          }
-          return "";
-        });
-        finish(responses);
+        // Resolve promises in the callback — getTotpSecret is sync-cached after
+        // the check above, so we use a sync-style resolution here via a void async wrapper
+        void (async () => {
+          const responses: string[] = await Promise.all(
+            prompts.map(async (prompt) => {
+              const lc = prompt.prompt.toLowerCase();
+              if (lc.includes("password")) return sshPassword;
+              if (lc.includes("verification") || lc.includes("otp") || lc.includes("token") || lc.includes("code")) {
+                if (totpCode) return totpCode;
+                // Generate fresh code right here — maximizes remaining window
+                const secret = await getTotpSecret(envName);
+                return secret ? generateTotp(secret) : "";
+              }
+              return "";
+            })
+          );
+          finish(responses);
+        })();
       });
     }
 
@@ -184,3 +210,4 @@ export function getTunnel(envName: string): ActiveTunnel | undefined {
 export function listActiveTunnels(): string[] {
   return [...activeTunnels.keys()];
 }
+
