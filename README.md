@@ -42,7 +42,7 @@ slow consolidation, graph-based linking. See `docs/architecture.md`.
 | Skills | 1 | [how-skills-work.md](docs/how-skills-work.md) |
 | Agents | 0 | [how-agents-work.md](docs/how-agents-work.md) |
 | Plugins | 0 | [how-plugins-work.md](docs/how-plugins-work.md) |
-| MCP Servers | 0 | [how-mcp-servers-work.md](docs/how-mcp-servers-work.md) |
+| MCP Servers | 1 | [how-mcp-servers-work.md](docs/how-mcp-servers-work.md) |
 
 ## Contributing
 

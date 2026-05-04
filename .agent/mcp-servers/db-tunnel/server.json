@@ -1,0 +1,117 @@
+{
+  "name": "db-tunnel",
+  "version": "0.1.0",
+  "description": "Query DEV/SEMI/PROD databases via SSH tunnels or direct connections. Supports PostgreSQL and MySQL. Credentials stored in OS Keychain.",
+  "transport": "stdio",
+  "command": "node",
+  "args": ["dist/index.js"],
+  "env": {},
+  "tools": [
+    {
+      "name": "list_environments",
+      "description": "List all configured database environments and their current connection status.",
+      "inputSchema": { "type": "object", "properties": {} }
+    },
+    {
+      "name": "connect",
+      "description": "Open SSH tunnel (if needed) and database connection for an environment.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "env": { "type": "string", "description": "Environment name (dev, semi, prod, local)" },
+          "totp_code": { "type": "string", "description": "6-digit TOTP code (only for PROD if secret not stored in keychain)" }
+        },
+        "required": ["env"]
+      }
+    },
+    {
+      "name": "disconnect",
+      "description": "Close database connection and SSH tunnel for an environment.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "env": { "type": "string", "description": "Environment name" }
+        },
+        "required": ["env"]
+      }
+    },
+    {
+      "name": "query",
+      "description": "Execute SQL on a connected environment. SELECTs auto-capped at row limit. Destructive statements need allow_mutations: true.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "env": { "type": "string", "description": "Environment name" },
+          "sql": { "type": "string", "description": "SQL to execute" },
+          "params": { "type": "array", "description": "Parameterized values" },
+          "allow_mutations": { "type": "boolean", "description": "Allow DROP/TRUNCATE/DELETE/ALTER" },
+          "row_limit": { "type": "number", "description": "Override default row cap" }
+        },
+        "required": ["env", "sql"]
+      }
+    },
+    {
+      "name": "list_schemas",
+      "description": "List all schemas (PostgreSQL) or databases (MySQL) in a connected environment.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "env": { "type": "string" }
+        },
+        "required": ["env"]
+      }
+    },
+    {
+      "name": "list_tables",
+      "description": "List tables in a schema.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "env": { "type": "string" },
+          "schema": { "type": "string", "description": "Schema or database name" }
+        },
+        "required": ["env", "schema"]
+      }
+    },
+    {
+      "name": "describe_table",
+      "description": "Get column definitions, types, nullability, defaults, and PK flags for a table.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "env": { "type": "string" },
+          "schema": { "type": "string" },
+          "table": { "type": "string" }
+        },
+        "required": ["env", "schema", "table"]
+      }
+    },
+    {
+      "name": "set_credential",
+      "description": "Save a credential (ssh-password, db-password, totp-secret) to OS Keychain for an environment.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "env": { "type": "string" },
+          "kind": { "type": "string", "enum": ["ssh-password", "db-password", "totp-secret"] },
+          "value": { "type": "string", "description": "The secret value" }
+        },
+        "required": ["env", "kind", "value"]
+      }
+    },
+    {
+      "name": "delete_credential",
+      "description": "Remove a credential from OS Keychain (use when password changes).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "env": { "type": "string" },
+          "kind": { "type": "string", "enum": ["ssh-password", "db-password", "totp-secret"] }
+        },
+        "required": ["env", "kind"]
+      }
+    }
+  ],
+  "resources": [],
+  "prompts": []
+}

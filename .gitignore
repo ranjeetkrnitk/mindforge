@@ -8,3 +8,9 @@
 # macOS metadata
 .DS_Store
 **/.DS_Store
+
+# db-tunnel MCP server — never commit real configs or credentials
+.agent/mcp-servers/db-tunnel/config.json
+.agent/mcp-servers/db-tunnel/node_modules/
+.agent/mcp-servers/db-tunnel/dist/
+.agent/mcp-servers/db-tunnel/.env
