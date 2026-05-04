@@ -55,7 +55,7 @@ server.tool(
 // ── query ──────────────────────────────────────────────────────────────────────
 server.tool(
   "query",
-  "Execute a SQL query on a connected environment. SELECT results are automatically capped at the configured row limit. Destructive statements (DROP, TRUNCATE, DELETE, ALTER) require allow_mutations: true.",
+  "Execute a SQL query on a connected environment. SELECT results are automatically capped at the configured row limit. Destructive statements (DROP, TRUNCATE, DELETE, ALTER, GRANT, REVOKE) return a requires_confirmation warning first — you MUST show the warning to the user and ask for explicit confirmation before calling again with allow_mutations: true.",
   {
     env: z.string().describe("Environment name"),
     sql: z.string().describe("SQL query to execute"),

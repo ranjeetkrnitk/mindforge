@@ -1,7 +1,22 @@
 import { getConnection } from "../db/connection.js";
 import { getDefaults } from "../config/loader.js";
 
-const DANGEROUS_PATTERN = /^\s*(drop|truncate|delete\s+from|alter\s+table|create\s+table|grant|revoke)/i;
+const DANGEROUS_OPS: Array<{ pattern: RegExp; label: string }> = [
+  { pattern: /^\s*drop\s+/i,     label: "DROP" },
+  { pattern: /^\s*truncate\s+/i, label: "TRUNCATE" },
+  { pattern: /^\s*delete\s+/i,   label: "DELETE" },
+  { pattern: /^\s*alter\s+/i,    label: "ALTER TABLE" },
+  { pattern: /^\s*create\s+/i,   label: "CREATE TABLE" },
+  { pattern: /^\s*grant\s+/i,    label: "GRANT" },
+  { pattern: /^\s*revoke\s+/i,   label: "REVOKE" },
+];
+
+function detectDangerousOp(sql: string): string | null {
+  for (const { pattern, label } of DANGEROUS_OPS) {
+    if (pattern.test(sql)) return label;
+  }
+  return null;
+}
 
 export async function query(
   envName: string,
@@ -18,11 +33,28 @@ export async function query(
   }
 
   const trimmed = sql.trim();
+  const dangerousOp = detectDangerousOp(trimmed);
 
-  if (!allowMutations && DANGEROUS_PATTERN.test(trimmed)) {
-    throw new Error(
-      `Potentially destructive statement detected. Pass allow_mutations: true to proceed.\nSQL: ${trimmed.slice(0, 120)}`
-    );
+  if (dangerousOp && !allowMutations) {
+    // Return a structured warning — do NOT execute. The agent must show this
+    // to the user and ask for explicit confirmation before retrying with
+    // allow_mutations: true.
+    return {
+      requires_confirmation: true,
+      env: envName,
+      dangerous_operation: dangerousOp,
+      sql_to_run: trimmed,
+      warning: [
+        `⚠️  DESTRUCTIVE OPERATION DETECTED: ${dangerousOp}`,
+        ``,
+        `Environment : ${envName}`,
+        `SQL         : ${trimmed}`,
+        ``,
+        `This statement can permanently delete or alter data.`,
+        `Please confirm with the user before proceeding.`,
+        `To execute, call query() again with allow_mutations: true.`,
+      ].join("\n"),
+    };
   }
 
   const defaults = getDefaults();
@@ -42,6 +74,7 @@ export async function query(
 
   return {
     env: envName,
+    ...(dangerousOp ? { executed_destructive_operation: dangerousOp } : {}),
     columns: result.columns,
     rows: result.rows,
     rowCount: result.rows.length,
