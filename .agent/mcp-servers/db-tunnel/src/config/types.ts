@@ -12,6 +12,13 @@ export interface SshConfig {
 
 export interface DbConfig {
   type: DbType;
+  /**
+   * For `ssh-tunnel` environments: the DB hostname as reachable FROM the bastion,
+   * not from your local machine. Mirrors the middle segment of the SSH -L flag:
+   *   ssh -L <localPort>:<host>:<port> user@bastion
+   *
+   * For `direct` environments: the DB hostname reachable from your machine directly.
+   */
   host: string;
   port: number;
   database: string;

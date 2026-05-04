@@ -78,7 +78,46 @@ set_credential({ "env": "prod", "kind": "db-password", "value": "mydbpassword" }
 
 If you don't store the TOTP secret, the agent will ask you for the 6-digit code each time.
 
-## Authentication Flow
+## How SSH Tunnel Config Maps to Your SSH Command
+
+Your manual command:
+```
+ssh -L 3325:db-trnx-write.semi.cashstar.net:3306 rkumar2@bastion.semi.cashstar.net
+```
+
+Maps to `config.json` like this:
+
+```
+ssh -L  <localPort> : <db.host>                          : <db.port>  <ssh.user>@<ssh.host>
+        (auto-pick)   db-trnx-write.semi.cashstar.net      3306        rkumar2    bastion.semi.cashstar.net
+```
+
+```json
+{
+  "semi": {
+    "type": "ssh-tunnel",
+    "ssh": {
+      "host": "bastion.semi.cashstar.net",
+      "port": 22,
+      "user": "rkumar2",
+      "auth": "password"
+    },
+    "db": {
+      "type": "mysql",
+      "host": "db-trnx-write.semi.cashstar.net",
+      "port": 3306,
+      "database": "your_db_name",
+      "user": "db_username"
+    }
+  }
+}
+```
+
+> **Important:** `db.host` is the DB hostname **as seen from the bastion**, not from your laptop.
+> The MCP server opens the SSH connection to `ssh.host` (the bastion) and tells it to
+> forward traffic onward to `db.host:db.port` — exactly like DBeaver does via your SSH tunnel.
+
+
 
 | Env | Flow |
 |---|---|
