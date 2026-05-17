@@ -14,11 +14,27 @@
 ## Vault Scan
 ```
 1. glob vault_root/**/*.md
-2. Skip: _archived/, _system/, .obsidian/
+2. Skip folders in EXCLUDE_FOLDERS (see below)
 3. Parse YAML frontmatter → created, tags, maturity, emotion
 4. Fallback: file mtime if no created
 5. Extract [[wikilinks]] → build link graph
 ```
+
+## Exclude Folders
+Folders to skip during vault scans (no .md content or system):
+```python
+EXCLUDE_FOLDERS = {
+    # System folders
+    "_archived", "_system", "_attachments", "_dashboards", 
+    ".trash", ".obsidian", ".claude",
+    # Export/data folders (no .md files)
+    "Notion Import", "Release Docs", "QA Exports", 
+    "SEMI Exports", "Prod Exports", "Alti ASP", 
+    "Docker", "bruno", "scripts", "Requestly", 
+    "splunk-labs", "Important Details", "Notes"
+}
+```
+Update this list when adding new non-markdown folders to vault.
 
 ## Link Extraction
 - `[[Note]]` → Note

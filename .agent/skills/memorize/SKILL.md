@@ -40,6 +40,22 @@ Check `config/user.md`:
 - **Print one line per file written**: `✓ <relative-path-from-vault-root>`
 - **No note content** in output unless the user explicitly asks to see it
 - End with a **single summary line**: `Saved N note(s) to <vault_root>`
+- **Update dashboard** after write operations (see Post-Action Hook below)
+
+## Post-Action Hook: Dashboard Update
+
+After any write operation (capture, consolidate, harvest, remap, prune), refresh the vault dashboard:
+
+```bash
+python3 ~/.copilot/skills/dashboard/scripts/refresh.py "<vault_root>"
+```
+
+Or invoke the `/dashboard` skill directly.
+
+Skip dashboard update if:
+- `_dashboards/` folder doesn't exist
+- Read-only mode (recall, mindmap with no writes)
+- User passes `--no-dashboard` flag
 
 ## Modes
 

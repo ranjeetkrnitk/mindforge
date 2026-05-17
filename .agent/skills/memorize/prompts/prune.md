@@ -34,3 +34,6 @@
 - Never hard-delete (always archive)
 - Dry-run by default if `prune_dry_run_default: true`
 - Preserve existing frontmatter keys
+
+## Post-Action
+After flagging/archiving, run dashboard update (see `prompts/dashboard-update.md`).

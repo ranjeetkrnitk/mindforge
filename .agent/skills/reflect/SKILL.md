@@ -31,6 +31,7 @@ Check `config/user.md`. If empty:
 | monthly | "monthly", "this month" | `prompts/monthly.md` |
 | custom | "reflect on [dates]" | `prompts/custom.md` |
 | insights | "vault insights" | `prompts/insights.md` |
+| dashboard | "dashboard", "html report" | `prompts/dashboard.md` |
 
 ## Key Features
 - **CLS signals**: replay events, promotion candidates, maturity progression
@@ -45,3 +46,10 @@ Check `config/user.md`. If empty:
 - Comparison deltas with ↑↓ arrows
 - 2-3 reflection prompts per summary
 - Wikilinks for actionable notes
+
+## HTML Dashboard Output
+When "dashboard" or "html" is requested:
+1. Scan vault for all metrics (see `prompts/dashboard.md`)
+2. Generate self-contained HTML with Chart.js
+3. Save to `<vault>/_dashboards/vault-health.html`
+4. Include: health score, domain/type charts, hub list, orphan warnings, recommendations

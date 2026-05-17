@@ -29,3 +29,6 @@ Saved 1 note to <vault_root>
 - No concept promotion (use `consolidate`)
 - Multiple ideas → multiple episodes
 - High-arousal experiences get emotion tags for better recall later
+
+## Post-Action
+After writing note(s), run dashboard update (see `prompts/dashboard-update.md`).

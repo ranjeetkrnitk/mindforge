@@ -36,3 +36,6 @@ Consolidated N→M notes. Merged X. Updated MOCs: [list]. Flagged for archive: Y
 - No fabricated connections — genuine overlap only
 - Concept titles must be falsifiable and specific
 - After run: update `last_consolidation_run` in `config/settings.md`
+
+## Post-Action
+After writing notes, run dashboard update (see `prompts/dashboard-update.md`).

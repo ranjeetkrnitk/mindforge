@@ -1,0 +1,8 @@
+# User Config — dashboard skill
+# This file is local and gitignored. Do not commit.
+# Copy to config/user.md and fill in your vault path.
+
+```yaml
+vault_root: ""
+setup_complete: false
+```

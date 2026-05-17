@@ -39,3 +39,6 @@ End: `Remapped N files. Created M MOCs. Conflicts: X (see _REMAP_REPORT.md).`
 - Unclassifiable files → `inbox/` with `#status/needs-review`
 - Flag naming conflicts; do not auto-resolve
 - `_system/` untouched — exception: writing `_system/_REMAP_REPORT.md`
+
+## Post-Action
+After applying changes, run dashboard update (see `prompts/dashboard-update.md`).

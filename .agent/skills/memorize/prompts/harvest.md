@@ -44,3 +44,6 @@ Next: "Run consolidate" if ≥3 overlapping episodes created
 - No modifications to existing notes
 - Skip purely procedural exchanges (reformatting, "run this command") — knowledge value only
 - Safe to run twice — dedup prevents duplicate notes
+
+## Post-Action
+After writing notes, run dashboard update (see `prompts/dashboard-update.md`).
