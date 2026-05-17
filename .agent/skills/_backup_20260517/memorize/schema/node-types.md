@@ -11,7 +11,7 @@ Read this before creating any note.
 **Template:** `templates/concept.md`
 
 An evergreen, claim-based note representing a single, stable idea. Concepts are
-the neocortical layer — they compress many episodes into a generalized insight.
+the neocortical layer -- they compress many episodes into a generalized insight.
 
 - Title must be a declarative claim: *"Attention mechanisms scale better than RNNs"*
 - Must link to at least one source or episode
@@ -27,7 +27,7 @@ the neocortical layer — they compress many episodes into a generalized insight
 A timestamped, specific capture. Raw, personal, tied to a moment in time.
 This is the hippocampal layer.
 
-- Title must be date-prefixed: `2024-01-15 — ...`
+- Title must be date-prefixed: `2024-01-15 -- ...`
 - Can be messy — accuracy over polish
 - Decays: if not linked to a concept within `decay_window`, flagged for review
 
@@ -49,6 +49,7 @@ from your CLS model. Questions are the engine of new learning.
 ## `claim`
 **Tag:** `#type/claim`
 **Folder:** `concepts/<domain>/`
+**Template:** `templates/claim.md`
 
 A specific, verifiable assertion extracted from a source. Smaller than a concept,
 bigger than a quote.
@@ -62,9 +63,9 @@ bigger than a quote.
 ## `source`
 **Tag:** `#type/source`
 **Folder:** `sources/`
-**Template:** (inline frontmatter, no separate template needed)
+**Template:** `templates/source.md`
 
-A reference to an external artifact — paper, book, article, video, conversation.
+A reference to an external artifact -- paper, book, article, video, conversation.
 
 Required frontmatter fields:
 ```yaml
@@ -82,7 +83,7 @@ key_claims:    # list of [[wikilinks]] to claim or concept notes derived from th
 **Folder:** `maps/`
 **Template:** `templates/moc.md`
 
-Map of Content — an index node for a topic. Not a concept itself, but a structured
+Map of Content -- an index node for a topic. Not a concept itself, but a structured
 entry point into a cluster of related notes.
 
 - Contains grouped `[[wikilinks]]` organized by subtopic
@@ -95,7 +96,7 @@ entry point into a cluster of related notes.
 **Tag:** `#type/person`
 **Folder:** `people/`
 
-A note about an individual — researcher, collaborator, author.
+A note about an individual -- researcher, collaborator, author.
 
 Required frontmatter:
 ```yaml

@@ -2,9 +2,9 @@
 name: memorize
 version: 0.2.0
 description: >
-  Second-brain skill grounded in Complementary Learning Systems (CLS) theory.
-  Captures, consolidates, maps, and reorganizes knowledge. Triggers: "remember
-  this", "memorize", "consolidate", "mind map", "remap", "harvest", "recall".
+  Second-brain skill grounded in CLS theory. Captures, consolidates, maps,
+  and reorganizes knowledge. Triggers: "remember this", "memorize", "consolidate
+  my notes", "show me a mind map", "remap my vault", "harvest this session".
 agent: agnostic
 compatibility:
   preferred_vault: obsidian
@@ -14,11 +14,10 @@ compatibility:
 
 # /memorize
 
-## Load Order
-1. `../_shared/conventions.md` — cross-skill standards
-2. `config/user.md` — vault path (personal, gitignored)
-3. `REF.md` — node types, link types, domains
-4. `config/settings.md` — thresholds
+## Always load first
+1. `config/user.md` — vault path (personal, gitignored)
+2. `REF.md` — node types, link types, domains, naming conventions
+3. `config/settings.md` — thresholds
 
 ## First-run setup (run before any mode)
 
@@ -26,13 +25,7 @@ Check `config/user.md`:
 - If `setup_complete: false` or `vault_root` is empty → run setup:
   1. Ask: *"Where is your Obsidian vault? (absolute path)"*
   2. Write the answer to `config/user.md` as `vault_root` and set `setup_complete: true`
-  3. **Permissions hint** — Tell the user:
-     ```
-     💡 To reduce permission prompts, run these in Copilot CLI:
-        /add-dir ~/.copilot/skills
-        /add-dir <vault_root>
-     ```
-  4. Confirm: `✓ Vault set to <path>. You're ready.`
+  3. Confirm: `✓ Vault set to <path>. You're ready.`
 - If `setup_complete: true` → proceed silently with `vault_root` from `config/user.md`
 
 ## Output behavior (all modes)
@@ -51,7 +44,6 @@ Check `config/user.md`:
 | 4 | `remap` | "remap my vault", "reorganize my notes", "apply CLS" | `prompts/remap.md` |
 | 5 | `harvest` | "harvest this session", "save what we discussed", "memorize this conversation" | `prompts/harvest.md` |
 | 6 | `prune` | "clean up empty notes", "prune my vault", "remove stubs", "find empty files" | `prompts/prune.md` |
-| 7 | `recall` | "recall", "what do I know about", "search my vault" | `prompts/recall.md` |
 
 ## File Structure
 

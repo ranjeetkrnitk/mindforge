@@ -9,7 +9,7 @@ archive_threshold: 30          # days before unlinked episode is archival candid
 min_cluster_size: 3            # min episodes in a cluster to trigger concept promotion
 min_links_for_evergreen: 2     # min outbound links for a concept to be evergreen
 consolidate_frequency: 7       # min days between consolidation runs
-last_consolidation_run: "2026-05-10"     # ISO 8601 — updated by agent after each run
+last_consolidation_run: ""     # ISO 8601 — updated by agent after each run
 ```
 
 ## Pattern Matching

@@ -2,6 +2,8 @@
 
 > ⚠️ DESTRUCTIVE — first-run vault reorganization.
 
+Read: `REF.md` · `config/settings.md`
+
 ## Phase 0 — Safety
 1. Ask: dry-run or apply directly? Default: **dry-run** (`remap_dry_run_default: true`).
 2. Remind user to back up / commit vault before a live run.

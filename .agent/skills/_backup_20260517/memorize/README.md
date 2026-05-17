@@ -20,13 +20,14 @@ Tell your agent:
 | `"consolidate my notes on machine learning"` | `consolidate` |
 | `"show me a mind map of my AI notes"` | `mindmap` |
 | `"remap my vault using CLS theory"` | `remap` (first-run) |
+| `"harvest this session"` | `harvest` |
 
 ## Obsidian Setup
 
 1. Point your vault to the directory where captured notes are stored
 2. Enable the Graph View plugin
 3. Run `remap` mode once on your existing vault to apply the taxonomy
-4. Use `capture` daily, `consolidate` weekly
+4. Use `capture` daily, `consolidate` weekly, `harvest` at end of any rich session
 
 ## CLS Theory — 30 Second Primer
 

@@ -22,6 +22,31 @@ Tell your agent:
 | `"remap my vault using CLS theory"` | `remap` (first-run) |
 | `"harvest this session"` | `harvest` |
 
+## Permissions Setup (Copilot CLI)
+
+This skill reads config files and writes notes to your vault. To reduce permission prompts, run these commands once:
+
+```bash
+# In Copilot CLI, add directories to the allowed list:
+/add-dir ~/.copilot/skills
+/add-dir /path/to/your/obsidian/vault
+```
+
+Or edit `~/.copilot/permissions-config.json` directly:
+
+```json
+{
+  "locations": {
+    "/Users/YOU/.copilot/skills": {
+      "tool_approvals": [{ "kind": "write" }]
+    },
+    "/path/to/your/vault": {
+      "tool_approvals": [{ "kind": "write" }]
+    }
+  }
+}
+```
+
 ## Obsidian Setup
 
 1. Point your vault to the directory where captured notes are stored

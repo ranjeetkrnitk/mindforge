@@ -1,18 +1,16 @@
 # memorize — Quick Reference
 
-> Agents: read this file ONCE before any mode. Replaces schema/taxonomy.md, schema/node-types.md, schema/link-types.md.
+> Agents: loaded via SKILL.md. Skill-specific node types and links.
 
 ## Node Types
-
-| type | folder | template | title format |
+| type | folder | template | title |
 |---|---|---|---|
-| `concept` | `concepts/<domain>/` | `templates/concept.md` | declarative claim sentence |
-| `episode` | `episodes/YYYY/MM/` | `templates/episode.md` | `YYYY-MM-DD -- Short title` |
-| `claim` | `concepts/<domain>/` | `templates/claim.md` | verifiable assertion |
+| `concept` | `concepts/<domain>/` | `concept.md` | declarative claim |
+| `episode` | `episodes/YYYY/MM/` | `episode.md` | `YYYY-MM-DD -- Title` |
+| `claim` | `concepts/<domain>/` | `claim.md` | verifiable assertion |
 | `question` | `inbox/` | — | ends with `?` |
-| `source` | `sources/` | `templates/source.md` | `Author YEAR -- Title` |
-| `moc` | `maps/` | `templates/moc.md` | `Topic MOC` |
-| `person` | `people/` | — | person name |
+| `source` | `sources/` | `source.md` | `Author YEAR -- Title` |
+| `moc` | `maps/` | `moc.md` | `Topic MOC` |
 
 ## Domains
 `science` · `technology` · `philosophy` · `self` · `craft` · `people` · `reference`
@@ -20,28 +18,23 @@
 ## Maturity
 `fleeting` → `developing` → `evergreen` · `archived`
 
-Evergreen requires: 2+ outbound concept links + 1 consolidate revisit + claim-based title.
+Evergreen: 2+ outbound links + consolidate revisit + claim title.
 
 ## Link Types
 | type | meaning |
 |---|---|
-| `supports` | evidence for another note |
-| `contradicts` | challenges another note |
-| `extends` | builds on without contradicting |
-| `recalls` | episode that triggered a concept retrieval |
-| `derived-from` | concept distilled from episodes/sources |
-| `questions` | question probing a concept |
-| `answers` | concept resolving a question |
+| `supports` | evidence for note |
+| `contradicts` | challenges note |
+| `extends` | builds on |
+| `recalls` | episode triggered retrieval |
+| `derived-from` | distilled from episodes |
+| `questions` / `answers` | Q&A relationship |
+
+## Emotion
+See `_shared/conventions.md`. Recall boosts: arousal=high → +3, matching valence → +1.5
 
 ## Tags
-YAML frontmatter (no `#`): `tags: [domain/X, type/Y, maturity/Z]`
-Inline body text: `#domain/X` syntax with `#`.
+Frontmatter: `tags: [domain/X, type/Y, maturity/Z, emotion/arousal-high]`
 
-## Naming
-- episode: `YYYY-MM-DD -- Short title.md`
-- concept: `Declarative claim sentence.md`
-- source: `Author YEAR -- Title.md`
-- moc: `Topic MOC.md`
-
-## Vault Paths (defaults)
-`inbox/` · `concepts/` · `episodes/YYYY/MM/` · `sources/` · `maps/` · `people/` · `_archived/` · `_system/`
+## Paths
+`inbox/` · `concepts/` · `episodes/YYYY/MM/` · `sources/` · `maps/` · `_archived/`

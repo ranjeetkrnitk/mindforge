@@ -7,7 +7,7 @@ must belong to exactly one **domain** and one **node type**.
 
 ## Top-Level Domains
 
-These are the root categories. Keep this list stable — adding new domains
+These are the root categories. Keep this list stable -- adding new domains
 should be deliberate, not reactive.
 
 | Domain Tag | Description |
@@ -18,7 +18,7 @@ should be deliberate, not reactive.
 | `#domain/self` | Personal experiences, reflections, goals |
 | `#domain/craft` | Skills being actively learned or practiced |
 | `#domain/people` | Notes on individuals, thinkers, collaborators |
-| `#domain/reference` | Definitions, specs, docs — lookup-only nodes |
+| `#domain/reference` | Definitions, specs, docs -- lookup-only nodes |
 
 ---
 
@@ -31,7 +31,7 @@ Every note has a maturity that reflects its position in the CLS consolidation cy
 | `#maturity/fleeting` | Just captured, unverified | Hippocampal |
 | `#maturity/developing` | Revisited at least once, partially linked | Transitional |
 | `#maturity/evergreen` | Stable, well-linked, generalized | Neocortical |
-| `#maturity/archived` | No longer active but preserved | — |
+| `#maturity/archived` | No longer active but preserved | -- |
 
 **Rule:** A note should only be promoted to `evergreen` when it has:
 - At least 2 outbound links to other concept nodes
@@ -62,16 +62,19 @@ vault/
 
 ## Naming Conventions
 
-- **Concept notes:** Declarative sentence titles — `The brain reconstructs memories on retrieval.md`
-- **Episode notes:** Date-prefixed — `2024-01-15 — Meeting with team on CLS model.md`
-- **MOC notes:** Topic + " MOC" suffix — `Machine Learning MOC.md`
-- **Source notes:** Author + Year + Title — `McClelland 1995 — Why there are complementary learning systems.md`
+- **Concept notes:** Declarative sentence titles -- `The brain reconstructs memories on retrieval.md`
+- **Episode notes:** Date-prefixed -- `2024-01-15 -- Meeting with team on CLS model.md`
+- **MOC notes:** Topic + " MOC" suffix -- `Machine Learning MOC.md`
+- **Source notes:** Author + Year + Title -- `McClelland 1995 -- Why there are complementary learning systems.md`
 
 ---
 
 ## Tag Composition Rules
 
-Every note should carry tags from three dimensions:
+Every note should carry tags from three dimensions.
+
+> **Notation note:** In Obsidian body text, tags use the `#tag` prefix (e.g., `#domain/science`).
+> In YAML frontmatter, omit the `#` — Obsidian adds it automatically.
 
 ```yaml
 tags:

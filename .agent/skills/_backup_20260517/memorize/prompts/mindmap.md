@@ -2,6 +2,8 @@
 
 > Graph generation — visualize the knowledge structure.
 
+Read: `REF.md` · `config/settings.md` (`mindmap_depth`)
+
 ## Steps
 
 1. **Find root**: topic-scoped → MOC note or most-linked concept; full vault → Home MOC in `maps/`.

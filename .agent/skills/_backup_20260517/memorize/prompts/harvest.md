@@ -2,6 +2,8 @@
 
 > Retrospective session capture — batch `capture` over a conversation.
 
+Read: `REF.md` · `config/settings.md` (`similarity_threshold`, `harvest_min_turns`, `harvest_merge_threshold`, `max_related_suggestions`)
+
 ## Steps
 
 1. **Load session**: use current conversation context, or query session store by ID, or ask user to paste text.

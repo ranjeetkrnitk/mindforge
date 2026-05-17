@@ -3,11 +3,9 @@ title: "{{DATE}} -- {{SHORT_DESCRIPTION}}"
 created: {{DATETIME}}
 tags: [domain/{{DOMAIN}}, type/episode, maturity/fleeting]
 captured_from: "{{conversation|article|book|thought|meeting}}"
-emotion:
-  arousal: {{high|medium|low}}
-  valence: {{positive|negative|neutral}}
-  label: "{{optional free text}}"
+source_url: ""
 related: ["[[{{MATCHED_CONCEPT_OR_EMPTY}}]]"]
+promoted: false
 ---
 
 # {{DATE}} -- {{SHORT_DESCRIPTION}}
@@ -19,5 +17,9 @@ related: ["[[{{MATCHED_CONCEPT_OR_EMPTY}}]]"]
 {{1-2 sentences}}
 
 ## Pattern Match
-- Closest: [[{{MATCHED_CONCEPT_OR_NONE}}]] | Confidence: {{high|low|none}}
-- No match → [[{{QUESTION}}?]]
+- Closest concept: [[{{MATCHED_CONCEPT_OR_NONE}}]]
+- Confidence: {{high|low|none}}
+- No match → [[{{QUESTION_THIS_RAISES}}?]]
+
+## Tags
+{{#theme/X #theme/Y}}

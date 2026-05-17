@@ -2,7 +2,9 @@
 
 > Neocortical compression — the "sleep" phase.
 
-## Pre-flight
+Read: `REF.md` · `config/settings.md`
+
+## Pre-flight checks
 - `archive_threshold` > `decay_window` — abort if not, warn user
 - `last_consolidation_run` + `consolidate_frequency` — warn if run too soon
 - `warn_on_early_consolidation` flag

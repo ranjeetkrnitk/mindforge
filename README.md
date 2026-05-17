@@ -1,50 +1,43 @@
-# ranjeet — Agent-Agnostic Second Brain
+# mindforge — Agent-Agnostic Second Brain
 
-A personal repository of skills, agents, plugins, and MCP server configs.
-Everything here is agent-agnostic — works with Claude, GPT, Cursor, Gemini,
-or any LLM that can read markdown.
+Personal repository of skills for knowledge management.
+Works with Claude, GPT, Cursor, Gemini, or any LLM that reads markdown.
 
-## Structure
+## Skills
 
-```
-.agent/
-├── skills/        # Task instructions — "how to do X"
-├── agents/        # Persona definitions — "who does X"
-├── plugins/       # Behavioral modifiers — "how agent acts"
-└── mcp-servers/   # Tool connectors — "what agent can access"
+| Skill | Purpose | Triggers |
+|-------|---------|----------|
+| **memorize** | Capture, consolidate, recall | "memorize", "consolidate", "recall" |
+| **reflect** | Vault analysis, insights | "weekly", "monthly", "vault insights" |
 
-helpers/           # Implementation scripts (Python, bash)
-docs/              # Architecture decisions and guides
-```
-
-## Philosophy
-
-Built on **Complementary Learning Systems (CLS) theory** — fast capture,
-slow consolidation, graph-based linking. See `docs/architecture.md`.
+## Core Features
+- **CLS Theory**: fast capture (episodes) → slow consolidation (concepts)
+- **Emotion Tracking**: arousal/valence tags for mood-congruent recall
+- **Graph Analysis**: hubs, bridges, orphans, health score
+- **Spaced Repetition**: dormant detection, review scheduling
 
 ## Quickstart
 
 ```bash
-# Capture a new memory
-./helpers/cli/run.sh skill memorize capture "I learned that X causes Y"
+# Capture with emotion
+"memorize: Just had a breakthrough moment understanding X!"
 
-# Consolidate recent notes
-./helpers/cli/run.sh skill memorize consolidate
+# Weekly reflection
+"reflect on last week"
 
-# Remap an existing Obsidian vault
-./helpers/cli/run.sh skill memorize remap --dry-run
+# Vault health check
+"vault insights"
 ```
 
-## Categories
+## Structure
 
-| Category | Count | Docs |
-|---|---|---|
-| Skills | 1 | [how-skills-work.md](docs/how-skills-work.md) |
-| Agents | 0 | [how-agents-work.md](docs/how-agents-work.md) |
-| Plugins | 0 | [how-plugins-work.md](docs/how-plugins-work.md) |
-| MCP Servers | 1 | [how-mcp-servers-work.md](docs/how-mcp-servers-work.md) |
+```
+.copilot/skills/
+├── memorize/    # Capture, consolidate, harvest, recall
+└── reflect/     # Weekly, monthly, custom, insights
+```
 
-## Contributing
-
-See [docs/contributing.md](docs/contributing.md) for how to add a new skill,
-agent, plugin, or MCP server.
+## Research Foundation
+- McClelland 1995 (CLS Theory)
+- Latimier 2020 (Spaced Repetition)
+- Balog 2024 (Personal Knowledge Graphs)
