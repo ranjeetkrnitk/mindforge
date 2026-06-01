@@ -9,6 +9,7 @@ Works with Claude, GPT, Cursor, Gemini, or any LLM that reads markdown.
 |-------|---------|----------|
 | **memorize** | Capture, consolidate, recall | "memorize", "consolidate", "recall" |
 | **reflect** | Vault analysis, insights | "weekly", "monthly", "vault insights" |
+| **jobhunt** | Job search pipeline - scan, evaluate, tailor, apply | "job search", "find jobs", "evaluate job", "track applications" |
 
 ## Core Features
 - **CLS Theory**: fast capture (episodes) → slow consolidation (concepts)
@@ -32,9 +33,10 @@ Works with Claude, GPT, Cursor, Gemini, or any LLM that reads markdown.
 ## Structure
 
 ```
-.copilot/skills/
+.agent/skills/
 ├── memorize/    # Capture, consolidate, harvest, recall
-└── reflect/     # Weekly, monthly, custom, insights
+├── reflect/     # Weekly, monthly, custom, insights
+└── jobhunt/     # Scan, evaluate, tailor, cover-letter, track, outreach, apply
 ```
 
 ## Research Foundation
