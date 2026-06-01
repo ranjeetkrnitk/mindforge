@@ -12,31 +12,26 @@ If job not in trigger: ask "Which job? (Company + Role)"
 If no `## Tailored Resume` in job note:
 Print: `⚠ No tailored resume found. Run /jobhunt tailor first for best results. Continue anyway? (y/n)`
 
-## Application walkthrough
+## Quick-apply path (fast)
+If job note has BOTH `## Tailored Resume` AND `## Cover Letter` sections:
+Print everything at once for copy-paste — no round trips:
+1. Personal info block (from config/user.md)
+2. Tailored bullets (from job note)
+3. Skills list (Strong + Partial from match table)
+4. Cover letter (from job note)
+5. `⚠ Export tailored resume as PDF before uploading.`
+Ask once at the end: "Any custom questions to answer? (paste them)"
+
+## Guided path (when content is missing or custom questions exist)
 Work through each section one at a time. Pull from vault note where available.
 
-**Personal info**
-Name, email, location, LinkedIn, GitHub/portfolio - pull from config or ask once.
-
-**Work experience**
-Present tailored bullets from job note, one role at a time.
-Ask: "Does this look good, or adjust? (ok/adjust)"
-
-**Education**
-Ask user to confirm - not stored in config.
-
-**Skills**
-Extract from skills match table in job note (Strong + Partial matches only).
-
-**Cover letter**
-Print saved cover letter for copy-paste. If none, offer to run cover-letter mode first.
-
-**Resume upload reminder**
-Print: `⚠ Remember to export your tailored resume as PDF before uploading.`
-
-**Custom questions**
-Tackle one at a time. Use JD context + resume note to draft answers.
-Ask for approval before moving to next question.
+**Personal info** - pull from config or ask once.
+**Work experience** - present tailored bullets; ask "ok/adjust" per role.
+**Education** - ask user to confirm (not stored in config).
+**Skills** - extract Strong + Partial matches from job note.
+**Cover letter** - print for copy-paste. If missing, offer to run cover-letter mode first.
+**Resume upload** - print: `⚠ Export tailored resume as PDF before uploading.`
+**Custom questions** - one at a time, draft using JD + resume context, ask approval before next.
 
 ## Completion
 Ask: "Application submitted? (y/n)"

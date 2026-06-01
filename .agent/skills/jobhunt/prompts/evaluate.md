@@ -5,7 +5,7 @@ If job not in trigger: ask "Which job? (Company + Role, or paste URL / JD)"
 
 ## Load
 - Job note: `<vault>/Job Hunt/Companies/<Company> - <Role>.md`
-- Resume note: `<vault_root>/<resume_note>` (from config/user.md)
+- Resume note: `<vault_root>/<resume_note>` — read once per session; reuse if already loaded earlier this conversation
 - `config/settings.md` for scoring weights
 
 ## Score each dimension 1-10
