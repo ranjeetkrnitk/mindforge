@@ -39,3 +39,10 @@ Otherwise: proceed silently.
 | apply, fill application, help me apply | apply | - |
 
 No trigger match: list all modes with one-line descriptions.
+
+## Response Output Rules (all modes)
+- Never reprint content that was just saved to the vault - one-line confirmation only
+- Never repeat the job title/company name more than once per response
+- Write confirmations: `✓ <relative vault path>` — nothing more
+- Next-step suggestions: max one line
+- If generated content (cover letter, bullets, outreach) is saved to vault, show only a 1-sentence preview or key stat in terminal

@@ -26,7 +26,8 @@ State availability. Simple call to action - not "please consider my application"
 Tone: direct, confident, human. Never open with "I am writing to apply for".
 
 ## Output (terminal)
-Print full letter for review.
+Print only the opening sentence as a preview — do NOT reprint the full letter in terminal.
+Full letter is in vault note.
 
 ## Vault write
 Append to job note:
@@ -34,4 +35,5 @@ Append to job note:
 ## Cover Letter
 <letter>
 ```
-Print: `✓ Cover letter saved. Next: /jobhunt apply or /jobhunt outreach`
+Print: `✓ Cover letter saved → Job Hunt/Companies/<Company> - <Role>.md`
+Print: `Next: /jobhunt apply or /jobhunt outreach`

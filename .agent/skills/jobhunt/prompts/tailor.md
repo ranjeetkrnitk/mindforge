@@ -27,7 +27,9 @@ Lead each with an impact metric. Use JD keywords verbatim where accurate.
 Format: `- [Metric/impact] by [action] using [tech/method]`
 
 ## Output (terminal)
-Print all three sections for review.
+Print only the gap summary — do NOT reprint content already saved to vault:
+`Skills: N strong, N partial, N gap` + list Gap skills only (user needs to know what's missing).
+Full table + summary + bullets are in vault note.
 
 ## Vault write
 Append to job note:

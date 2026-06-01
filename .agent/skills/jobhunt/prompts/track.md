@@ -15,13 +15,15 @@ Render pipeline board in terminal:
 ─────────────────────────────────────────────────────────────────
 ```
 
-Then list active jobs grouped by stage (skip Closed):
+Then list only jobs updated in the last 7 days (grouped by stage):
 ```
 Evaluated:
-  • Stripe - Staff Engineer (8.2)  last updated: 2026-05-30
+  • Stripe - Staff Engineer (8.2)  updated: 2026-05-30
 Applied:
   • Anthropic - Senior ML Engineer (7.8)  applied: 2026-05-28
 ```
+If no activity in 7 days: skip the list entirely.
+For older jobs: `+N more active — open vault to browse.`
 
 ## sub-command: move
 Trigger: "move <Company> <Role> to <Stage>" or "track move ..."

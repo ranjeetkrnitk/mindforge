@@ -21,11 +21,8 @@ If job not in trigger: ask "Which job? (Company + Role, or paste URL / JD)"
 Use scoring guide in REF.md. Round total to 1 decimal.
 
 ## Output (terminal)
-1. Print score table with filled values
-2. Print 3-sentence summary:
-   - Overall recommendation (pursue / skip / borderline)
-   - Strongest positive signal
-   - Biggest risk or gap
+One-line scorecard: `Score 7.8 — role_fit 8 | comp 7 | stage 8 | location 9 | growth 7`
+Two-sentence verdict: recommendation (pursue/skip/borderline) + top risk or gap.
 
 ## Vault write
 - Update job note frontmatter: `score: <value>`, `stage: Evaluated`
